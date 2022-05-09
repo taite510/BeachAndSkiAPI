@@ -1,1 +1,1 @@
-# BeachAndSkiAPI
+# BeachOrSkiAPI
