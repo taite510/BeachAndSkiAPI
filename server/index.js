@@ -3,10 +3,12 @@ const app = express();
 const cors = require('cors');
 const port = 3001;
 const db = require('./controller.js');
+const morgan = require('morgan');
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 
 app.get('/cities', (req, res) => {
   db.getAllCityData((err, response) => {
@@ -29,7 +31,7 @@ app.put('/cities', (req, res) => {
   })
 })
 
-const requestLoop = setInterval(() => {updateCities()}, 300000)
+const requestLoop = setInterval(() => {updateCities()}, 600000)
 
 const updateCities = () => {
   db.updateWeather('beachCities', (err, response) => {
