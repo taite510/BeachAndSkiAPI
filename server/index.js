@@ -31,8 +31,6 @@ app.put('/cities', (req, res) => {
   })
 })
 
-const requestLoop = setInterval(() => {updateCities()}, 600000)
-
 const updateCities = () => {
   db.updateWeather('beachCities', (err, response) => {
     if (err) {
@@ -51,6 +49,8 @@ const updateCities = () => {
 }
 
 updateCities();
+
+const requestLoop = setInterval(() => {updateCities()}, 600000)
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
