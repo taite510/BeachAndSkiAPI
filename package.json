@@ -4,7 +4,7 @@
   "description": "API for BeachOrSki app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --forceExit",
     "start": "nodemon server/index.js"
   },
   "repository": {
@@ -24,5 +24,9 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16",
     "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0",
+    "supertest": "^6.2.3"
   }
 }

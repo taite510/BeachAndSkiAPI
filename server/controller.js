@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 const axios = require('axios');
 const connectionString = require('../config.js').connectionString
-const TOKEN = require('../config.js').TOKEN
+const key = require('../config.js').key
 const cities = require('../cities.js')
 
 const client = new Client({
@@ -29,7 +29,7 @@ module.exports = {
     });
   },
   updateWeather: (type, cb) => {
-    axios.all(cities[type].map((city) => axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&exclude=minutely,hourly,daily&appid=${TOKEN}&units=imperial`)))
+    axios.all(cities[type].map((city) => axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${city.lat}&lon=${city.lon}&exclude=minutely,hourly,daily&appid=${key}&units=imperial`)))
     .then(axios.spread((...results) => {
       let values = '';
       for (let i = 0; i < results.length; i++) {

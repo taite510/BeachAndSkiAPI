@@ -55,3 +55,5 @@ const requestLoop = setInterval(() => {updateCities()}, 600000)
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 })
+
+module.exports = app;
