@@ -12,7 +12,8 @@ CREATE TABLE "weather"."cities" (
   "temp" decimal NOT NULL,
   "clouds" int NOT NULL,
   "wind_speed" decimal NOT NULL,
-  "alerts" varchar
+  "alerts" varchar,
+  "reason" varchar
 )
 
 -- to create schema, run:

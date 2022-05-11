@@ -36,13 +36,28 @@ module.exports = {
         const currentCity = cities[type][i]
         const [cityName, state] = cities[type][i].name.split(', ')
         const weatherData = results[i].data.current
-        const alerts = results[i].data.alerts !== undefined ? results[i].data.alerts : 'NULL';
-        values += `('${cityName}','${state}','${type}',${currentCity.lat},${currentCity.lon},${weatherData.temp},${weatherData.clouds},${weatherData.wind_speed},${alerts})`
+        const alerts = results[i].data.alerts !== undefined ? results[i].data.alerts[0].event : null;
+        let reason = alerts !== null ? alerts : null;
+        if (type === 'beachCities') {
+          if (weatherData.temp < 70) {
+            reason = 'Too Cold!';
+          } else if (weatherData.wind_speed > 20) {
+            reason = 'Too Windy!';
+          } else if (weatherData.clouds > 10) {
+            reason = 'Too Cloudy!';
+          }
+        } else {
+          if (weatherData.temp > 50) {
+            reason = 'Not Cold Enough!';
+          }
+        }
+
+        values += `('${cityName}','${state}','${type}',${currentCity.lat},${currentCity.lon},${weatherData.temp},${weatherData.clouds},${weatherData.wind_speed},'${alerts}','${reason}')`
         if (i !== results.length - 1) {
           values += ','
         }
       }
-      const queryString = `INSERT INTO weather.cities (city,state,type,latitude,longitude,temp,clouds,wind_speed,alerts) VALUES ${values} ON CONFLICT (city) DO UPDATE SET temp = excluded.temp, clouds = excluded.clouds, wind_speed = excluded.wind_speed, alerts = excluded.alerts`;
+      const queryString = `INSERT INTO weather.cities (city,state,type,latitude,longitude,temp,clouds,wind_speed,alerts,reason) VALUES ${values} ON CONFLICT (city) DO UPDATE SET temp = excluded.temp, clouds = excluded.clouds, wind_speed = excluded.wind_speed, alerts = excluded.alerts, reason = excluded.reason`;
       client.query(queryString, (err, data) => {
         if (err) {
           console.log(err);
