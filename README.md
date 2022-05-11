@@ -13,7 +13,7 @@ Navigate to the base directory and install the BeachOrSki API dependencies with 
   npm install
 ```
 
-The Postgres connection string is stored in a config.js file that is not provided. This app also requires a free API key from [OpenWeatherMap](https://openweathermap.org/api), which is stored in the same config.js file. Please make a config.js file using the config.example.js file provided and save that file in the base directory.
+The Postgres connection string is stored in a config.js file that is not provided ([Examples of connection strings](https://stackoverflow.com/questions/3582552/what-is-the-format-for-the-postgresql-connection-string-url)). This app also requires a free API key from [OpenWeatherMap](https://openweathermap.org/api), which is stored in the same config.js file. Please make a config.js file using the config.example.js file provided and save that file in the base directory.
 
 Then run the schema file to create the table
 
