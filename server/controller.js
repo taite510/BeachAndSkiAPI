@@ -51,10 +51,9 @@ module.exports = {
             reason = 'Not Cold Enough!';
           }
         }
-
         values += `('${cityName}','${state}','${type}',${currentCity.lat},${currentCity.lon},${weatherData.temp},${weatherData.clouds},${weatherData.wind_speed},'${alerts}','${reason}')`
         if (i !== results.length - 1) {
-          values += ','
+          values += ',';
         }
       }
       const queryString = `INSERT INTO weather.cities (city,state,type,latitude,longitude,temp,clouds,wind_speed,alerts,reason) VALUES ${values} ON CONFLICT (city) DO UPDATE SET temp = excluded.temp, clouds = excluded.clouds, wind_speed = excluded.wind_speed, alerts = excluded.alerts, reason = excluded.reason`;

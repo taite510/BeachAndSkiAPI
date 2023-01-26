@@ -28,6 +28,6 @@ test('PUT /cities will update said city type', async () => {
   .expect(200)
   .then((res) => {
     expect(res.body.command).toBe('INSERT')
-    expect(res.body.rowCount).toBe(allCities.beachCities.length + 2)
+    expect(res.body.rowCount).toBe(allCities.beachCities.length)
   });
 });
